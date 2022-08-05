@@ -1,7 +1,12 @@
 #!/bin/bash
 
+if [ ! -f ".env" ]; then
+    echo "Please, create a .env file based on .env.default to set HOSTNAME variable."
+fi
+
 IPV4=`ip addr show $(ip route | awk '/default/ { print $5 }') | grep "inet" | head -n 1 | awk '/inet/ {print $2}' | cut -d'/' -f1`
-HOSTNAME=`hostname -f`
+grep -v '^#' .env
+export $(grep -v '^#' .env | xargs)
 
 docker run -it \
            --rm \
