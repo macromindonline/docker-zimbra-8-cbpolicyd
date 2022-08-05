@@ -57,10 +57,6 @@ APT::Periodic::Unattended-Upgrade "1";
 EOF
 
 echo
-echo Installing cbpolicyd with configuration
-bash /app/setup-cbpolicyd.sh
-
-echo
 echo Copying customized scripts
 cp -f $SCRIPTPATH/queue-control.sh /root/
 cp -f $SCRIPTPATH/queue-mon.sh /root/

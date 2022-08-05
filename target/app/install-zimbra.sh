@@ -107,6 +107,9 @@ apt-get install -y bsd-mailx
 # let the container start Zimbra services next time
 rm -f /.dont_start_zimbra
 
+echo "Installing cbpolicyd with configuration"
+/app/setup-cbpolicyd.sh
+
 # restart services
 echo
 echo "Restarting services..."
