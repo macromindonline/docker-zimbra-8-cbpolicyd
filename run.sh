@@ -1,7 +1,7 @@
 #!/bin/bash
 
-IPV4="10.100.1.68" 
-HOSTNAME="mx07.macromind.net" 
+IPV4=`ip addr show $(ip route | awk '/default/ { print $5 }') | grep "inet" | head -n 1 | awk '/inet/ {print $2}' | cut -d'/' -f1`
+HOSTNAME=`hostname -f`
 
 docker run -it \
            --rm \
