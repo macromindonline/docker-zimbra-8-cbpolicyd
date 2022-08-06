@@ -58,8 +58,8 @@ function setup_environment
         touch $ZIMBRA_ENVIRONMENT_PATH/.dont_start_zimbra
 
         echo "Copying customized scripts"
-        cp -f $SCRIPTPATH/queue-control.sh /root/
-        cp -f $SCRIPTPATH/queue-mon.sh /root/
+        cp -f /app/queue-control.sh /root/
+        cp -f /app/queue-mon.sh /root/
         chmod 755 /root/queue-control.sh
         chmod 755 /root/queue-mon.sh
 
