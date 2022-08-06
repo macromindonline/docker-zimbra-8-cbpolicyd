@@ -56,6 +56,18 @@ function setup_environment
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/app/install-zimbra.sh
         chmod 644 $ZIMBRA_ENVIRONMENT_PATH/app/resources/50unattended-upgrades
         touch $ZIMBRA_ENVIRONMENT_PATH/.dont_start_zimbra
+
+        echo "Copying customized scripts"
+        cp -f $SCRIPTPATH/queue-control.sh /root/
+        cp -f $SCRIPTPATH/queue-mon.sh /root/
+        chmod 755 /root/queue-control.sh
+        chmod 755 /root/queue-mon.sh
+
+        echo "Installing crontab"
+        echo "*/1 * * * * /root/queue-control.sh" >> /etc/crontab
+        echo "*/2 * * * * /root/queue-mon.sh" >> /etc/crontab
+        echo "0 0 * * * /root/queue-mon.sh clean" >> /etc/crontab
+
         prepare_chroot
         chroot $ZIMBRA_ENVIRONMENT_PATH /app/setup-environment.sh
         chroot $ZIMBRA_ENVIRONMENT_PATH /app/install-zimbra.sh # starts services at the end...

@@ -56,17 +56,4 @@ APT::Periodic::AutocleanInterval "3";
 APT::Periodic::Unattended-Upgrade "1";
 EOF
 
-echo
-echo Copying customized scripts
-cp -f $SCRIPTPATH/queue-control.sh /root/
-cp -f $SCRIPTPATH/queue-mon.sh /root/
-chmod 755 /root/queue-control.sh
-chmod 755 /root/queue-mon.sh
-
-echo
-echo Installing crontab
-echo "*/1 * * * * /root/queue-control.sh" >> /etc/crontab
-echo "*/2 * * * * /root/queue-mon.sh" >> /etc/crontab
-echo "0 0 * * * /root/queue-mon.sh clean" >> /etc/crontab
-
 exit 0
