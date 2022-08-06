@@ -1,13 +1,13 @@
 #!/bin/bash
 
-if [ ! -f ".env" ]; then
-    echo "Please, create a .env file based on .env.default to set HOSTNAME variable."
+if [ ! -f "env.conf" ]; then
+    echo "Please, create a env.conf file based on .env.default to set HOSTNAME variable."
     exit
 fi
 
 IPV4=`ip addr show $(ip route | awk '/default/ { print $5 }') | grep "inet" | head -n 1 | awk '/inet/ {print $2}' | cut -d'/' -f1`
-grep -v '^#' .env
-export $(grep -v '^#' .env | xargs)
+grep -v '^#' env.conf
+export $(grep -v '^#' env.conf | xargs)
 
 docker run -it \
            --rm \

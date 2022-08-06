@@ -60,6 +60,8 @@ echo
 echo Copying customized scripts
 cp -f $SCRIPTPATH/queue-control.sh /root/
 cp -f $SCRIPTPATH/queue-mon.sh /root/
+chmod 755 /root/queue-control.sh
+chmod 755 /root/queue-mon.sh
 
 echo
 echo Installing crontab
