@@ -60,8 +60,10 @@ function setup_environment
         echo "Copying customized scripts"
         cp /app/queue-control.sh $ZIMBRA_ENVIRONMENT_PATH/root/
         cp /app/queue-mon.sh $ZIMBRA_ENVIRONMENT_PATH/root/
+	cp /app/setup-cbpolicyd.sh $ZIMBRA_ENVIRONMENT_PATH/app/
         chmod 755 $ZIMBRA_ENVIRONMENT_PATH/root/queue-control.sh
         chmod 755 $ZIMBRA_ENVIRONMENT_PATH/root/queue-mon.sh
+	chmod 750 $ZIMBRA_ENVIRONMENT_PATH/app/setup-cbpolicyd.sh
 
         echo "Installing crontab"
         #echo "*/1 * * * * /root/queue-control.sh" >> /etc/crontab
