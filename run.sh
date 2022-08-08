@@ -12,6 +12,7 @@ export $(grep -v '^#' env.conf | xargs)
 docker run -it \
            --rm \
            --hostname $HOSTNAME \
+	   --name $HOSTNAME \
            -p $IPV4:25:25 \
            -p $IPV4:80:80 \
            -p $IPV4:110:110 \
