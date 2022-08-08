@@ -58,15 +58,15 @@ function setup_environment
         touch $ZIMBRA_ENVIRONMENT_PATH/.dont_start_zimbra
 
         echo "Copying customized scripts"
-        cp -f /app/queue-control.sh /root/
-        cp -f /app/queue-mon.sh /root/
-        chmod 755 /root/queue-control.sh
-        chmod 755 /root/queue-mon.sh
+        cp /app/queue-control.sh $ZIMBRA_ENVIRONMENT_PATH/root/
+        cp /app/queue-mon.sh $ZIMBRA_ENVIRONMENT_PATH/root/
+        chmod 755 $ZIMBRA_ENVIRONMENT_PATH/root/queue-control.sh
+        chmod 755 $ZIMBRA_ENVIRONMENT_PATH/root/queue-mon.sh
 
         echo "Installing crontab"
-        echo "*/1 * * * * /root/queue-control.sh" >> /etc/crontab
-        echo "*/2 * * * * /root/queue-mon.sh" >> /etc/crontab
-        echo "0 0 * * * /root/queue-mon.sh clean" >> /etc/crontab
+        #echo "*/1 * * * * /root/queue-control.sh" >> /etc/crontab
+        #echo "*/2 * * * * /root/queue-mon.sh" >> /etc/crontab
+        #echo "0 0 * * * /root/queue-mon.sh clean" >> /etc/crontab
 
         prepare_chroot
         chroot $ZIMBRA_ENVIRONMENT_PATH /app/setup-environment.sh
