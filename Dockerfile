@@ -1,5 +1,4 @@
 FROM ubuntu:18.04
-MAINTAINER Sascha Falk <sascha@falk-online.eu>
 
 # Update image and install additional packages
 # -----------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ ! -f "env.conf" ]; then
-    echo "Please, create a env.conf file based on .env.default to set HOSTNAME variable."
+if [ ! -f "env.prod" ]; then
+    echo "Please, create a env.prod file based on env.example to set HOSTNAME variable."
     exit
 fi
 

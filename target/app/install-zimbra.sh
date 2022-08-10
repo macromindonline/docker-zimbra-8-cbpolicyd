@@ -107,8 +107,8 @@ apt-get install -y bsd-mailx
 # let the container start Zimbra services next time
 rm -f /.dont_start_zimbra
 
-echo "Installing cbpolicyd with configuration"
-/app/setup-cbpolicyd.sh
+echo "Enabling cbpolicyd"
+# /app/setup-cbpolicyd.sh
 sudo -u zimbra /opt/zimbra/bin/zmprov ms $(zmhostname) +zimbraServiceEnabled cbpolicyd
 sudo -u zimbra /opt/zimbra/bin/zmprov ms $(zmhostname) zimbraCBPolicydQuotasEnabled TRUE
 
