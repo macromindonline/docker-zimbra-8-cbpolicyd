@@ -109,8 +109,8 @@ rm -f /.dont_start_zimbra
 
 echo "Enabling cbpolicyd"
 # /app/setup-cbpolicyd.sh
-sudo -u zimbra /opt/zimbra/bin/zmprov ms $(zmhostname) +zimbraServiceEnabled cbpolicyd
-sudo -u zimbra /opt/zimbra/bin/zmprov ms $(zmhostname) zimbraCBPolicydQuotasEnabled TRUE
+sudo -u zimbra /opt/zimbra/bin/zmprov ms `hostname -f` +zimbraServiceEnabled cbpolicyd
+sudo -u zimbra /opt/zimbra/bin/zmprov ms `hostname -f` zimbraCBPolicydQuotasEnabled TRUE
 
 # restart services
 echo
