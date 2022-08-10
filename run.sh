@@ -6,8 +6,8 @@ if [ ! -f "env.prod" ]; then
 fi
 
 IPV4=`ip addr show $(ip route | awk '/default/ { print $5 }') | grep "inet" | head -n 1 | awk '/inet/ {print $2}' | cut -d'/' -f1`
-grep -v '^#' env.conf
-export $(grep -v '^#' env.conf | xargs)
+grep -v '^#' env.prod
+export $(grep -v '^#' env.prod | xargs)
 
 docker run -it \
            --rm \
