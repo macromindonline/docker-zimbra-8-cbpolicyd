@@ -93,6 +93,9 @@ grep -lZr -e ".*sername=.*$" "/opt/zimbra/conf/cbpolicyd.conf.in" | xargs -0 sed
 echo "Setting password in /opt/zimbra/conf/cbpolicyd.conf.in"
 grep -lZr -e ".*assword=.*$" "/opt/zimbra/conf/cbpolicyd.conf.in"  | xargs -0 sed -i "s^.*assword=.*$^Password=${CBPOLICYD_PWD}^g"
 
+echo "Changing address listening"
+sed -i 's/localhost/*/g' "/opt/zimbra/conf/cbpolicyd.conf.in"
+
 echo "Setting database in /opt/zimbra/conf/cbpolicyd.conf.in"
 grep -lZr -e "DSN=.*$" "/opt/zimbra/conf/cbpolicyd.conf.in"  | xargs -0 sed -i "s^DSN=.*$^DSN=DBI:mysql:database=policyd_db;host=127.0.0.1;port=7306^g"
 

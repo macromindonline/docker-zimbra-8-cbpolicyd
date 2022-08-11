@@ -107,10 +107,20 @@ apt-get install -y bsd-mailx
 # let the container start Zimbra services next time
 rm -f /.dont_start_zimbra
 
+echo
+echo "Disabling Antivirus and Antispam - Using MACROMIND Antispam cluster solution"
+sudo -u zimbra /opt/zimbra/bin/zmprov -l ms `hostname -f` -zimbraServiceEnabled antispam 
+sudo -u zimbra /opt/zimbra/bin/zmprov -l ms `hostname -f` -zimbraServiceEnabled antivirus 
+sudo -u zimbra /opt/zimbra/bin/zmprov -l ms `hostname -f` -zimbraServiceEnabled amavis
+
+echo
 echo "Enabling cbpolicyd"
-# /app/setup-cbpolicyd.sh
+/app/setup-cbpolicyd.sh
+sudo -u zimbra /opt/zimbra/bin/zmprov ms `hostname -f` +zimbraServiceInstalled cbpolicyd
 sudo -u zimbra /opt/zimbra/bin/zmprov ms `hostname -f` +zimbraServiceEnabled cbpolicyd
-sudo -u zimbra /opt/zimbra/bin/zmprov ms `hostname -f` zimbraCBPolicydQuotasEnabled TRUE
+sudo -u zimbra /opt/zimbra/bin/zmprov ms `hostname -f` zimbraCBPolicydAccessControlEnabled TRUE
+sudo -u zimbra /opt/zimbra/bin/zmprov mcf +zimbraMtaRestriction 'check_policy_service inet:127.0.0.1:10031'
+sudo -u zimbra /opt/zimbra/bin/zmprov ms `hostname -f` zimbraCBPolicydLogLevel 4
 
 # restart services
 echo
