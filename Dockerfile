@@ -4,15 +4,15 @@ FROM ubuntu:18.04
 # -----------------------------------------------------------------------------
 ENV DEBIAN_FRONTEND=noninteractive
 RUN \
-  apt-get -y update && \
-  apt-get -y install \
+  apt update && \
+  apt install \
     debootstrap \
     dnsmasq \
     iproute2 \
     iptables \
-    sed && \
-  apt-get -y autoremove && \
-  apt-get clean && \
+    sed -y && \
+  apt autoremove -y && \
+  apt clean -y && \
   rm -rf /var/lib/apt/lists/*
 
 # Copy prepared files into the image
@@ -42,7 +42,7 @@ VOLUME [ "/data" ]
 # 5223/tcp - XMPP (default legacy port)
 # 7071/tcp - HTTPS (admin panel, https://<host>/zimbraAdmin)
 # -----------------------------------------------------------------------------
-EXPOSE 25 80 110 143 443 465 587 993 995 5222 5223 7071
+EXPOSE 25 80 110 143 443 465 587 993 995 5222 5223 7071 7780
 
 # configure container startup
 # -----------------------------------------------------------------------------

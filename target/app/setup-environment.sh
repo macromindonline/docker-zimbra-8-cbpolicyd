@@ -27,7 +27,7 @@ apt-get -y install \
     iproute2 \
     logrotate \
     lsb-release \
-    nano \
+    vim-nox \
     net-tools \
     python3 \
     python3-pip \
@@ -36,7 +36,9 @@ apt-get -y install \
     ssh \
     sudo \
     unattended-upgrades \
-    wget
+    wget \
+    gawk \
+    certbot
 
 echo
 echo Preparing virtual Python environment for setup/service scripts...
