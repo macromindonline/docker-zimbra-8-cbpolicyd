@@ -62,6 +62,7 @@ function setup_environment
         cp /app/queue-mon.sh $ZIMBRA_ENVIRONMENT_PATH/root/
         cp /app/certbot-zimbra.sh $ZIMBRA_ENVIRONMENT_PATH/root/
         cp /app/certbot-zimbra-deploy.sh $ZIMBRA_ENVIRONMENT_PATH/root/
+        cp /app/zextras_suite-latest.tgz $ZIMBRA_ENVIRONMENT_PATH/root/
 	    cp /app/setup-cbpolicyd.sh $ZIMBRA_ENVIRONMENT_PATH/app/
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/queue-control.sh
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/queue-mon.sh
