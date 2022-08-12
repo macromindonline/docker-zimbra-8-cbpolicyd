@@ -322,7 +322,9 @@ find_additional_public_hostnames() {
 	extra_domains=(
 		$(su - zimbra -c "zmprov $zmprov_opts gad" | awk '{print "mail."$1}') 
 		$(su - zimbra -c "zmprov $zmprov_opts gad" | awk '{print "webmail."$1}')
-	) ! "$quiet" && echo "Found ${#extra_domains[@]} zimbraPublicServiceHostnames through auto-detection"
+	) 
+	
+	! "$quiet" && echo "Found ${#extra_domains[@]} zimbraPublicServiceHostnames through auto-detection"
 
 	return 0
 }
@@ -604,6 +606,29 @@ deploy_cert() {
 	return 0
 }
 
+prepare_cert_deploy() {
+
+	wget -O /tmp/ISRG-X1.pem https://letsencrypt.org/certs/isrgrootx1.pem
+	wget -O /tmp/R3.pem https://letsencrypt.org/certs/lets-encrypt-r3.pem
+
+	cp /etc/letsencrypt/live/$(hostname -f)/privkey.pem /opt/zimbra/ssl/zimbra/commercial/commercial.key
+	chown zimbra:zimbra /opt/zimbra/ssl/zimbra/commercial/commercial.key
+
+	cat /tmp/R3.pem > /etc/letsencrypt/live/$(hostname -f)/chain.pem
+	cat /tmp/ISRG-X1.pem >> /etc/letsencrypt/live/$(hostname -f)/chain.pem
+
+	chmod o+rx /etc/letsencrypt/archive
+	chmod o+rx /etc/letsencrypt/live
+
+	cd /tmp && su - zimbra -c "/opt/zimbra/bin/zmcertmgr verifycrt comm /opt/zimbra/ssl/zimbra/commercial/commercial.key /etc/letsencrypt/live/$(hostname -f)/cert.pem /etc/letsencrypt/live/$(hostname -f)/chain.pem"
+	cd /tmp && su - zimbra -c "/opt/zimbra/bin/zmcertmgr deploycrt comm /etc/letsencrypt/live/$(hostname -f)/cert.pem /etc/letsencrypt/live/$(hostname -f)/chain.pem"
+
+	chmod o-rx /etc/letsencrypt/archive
+	chmod o-rx /etc/letsencrypt/live
+
+	cd /tmp && su - zimbra -c "zmcontrol restart"
+}
+
 usage () {
 	cat <<EOF
 USAGE: $(basename $0) < -d | -n | -p > [-aNuzjxcq] [-H my.host.name] [-e extra.domain.tld] [-w /var/www] [-s <service_names>] [-P port] [-L "--extra-le-parameters ..."]
@@ -776,7 +801,8 @@ if ! "$deploy_only"; then
 fi
 
 set_certpath
-prepare_cert
-deploy_cert
+# prepare_cert
+# deploy_cert
+prepare_cert_deploy
 
 exit 0
