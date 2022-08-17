@@ -122,6 +122,11 @@ sudo -u zimbra /opt/zimbra/bin/zmprov ms `hostname -f` zimbraCBPolicydAccessCont
 sudo -u zimbra /opt/zimbra/bin/zmprov mcf +zimbraMtaRestriction 'check_policy_service inet:127.0.0.1:10031'
 sudo -u zimbra /opt/zimbra/bin/zmprov ms `hostname -f` zimbraCBPolicydLogLevel 4
 
+echo
+echo "Configuring to resolve hostname internally"
+sudo -u zimbra /opt/zimbra/bin/zmprov ms `hostname -f` zimbraMtaLmtpHostLookup native
+sudo -u zimbra /opt/zimbra/bin/zmprov mcf zimbraMtaLmtpHostLookup native
+
 # restart services
 echo
 echo "Restarting services..."
