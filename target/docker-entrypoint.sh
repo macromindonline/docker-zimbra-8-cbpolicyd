@@ -74,6 +74,7 @@ function setup_environment
         #echo "*/1 * * * * /root/queue-control.sh" >> /etc/crontab
         #echo "*/2 * * * * /root/queue-mon.sh" >> /etc/crontab
         #echo "0 0 * * * /root/queue-mon.sh clean" >> /etc/crontab
+        #echo "0 0 * * SAT sudo -u zimbra for i in `/opt/zimbra/bin/zmprov -l gaa`; do zmmailbox -z -A -m $i emptyDumpster; done" >> /etc/crontab
 
         prepare_chroot
         chroot $ZIMBRA_ENVIRONMENT_PATH /app/setup-environment.sh
