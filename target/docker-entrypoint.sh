@@ -64,11 +64,17 @@ function setup_environment
         cp /app/certbot-zimbra-deploy.sh $ZIMBRA_ENVIRONMENT_PATH/root/
         cp /app/zextras_suite-latest.tgz $ZIMBRA_ENVIRONMENT_PATH/root/
 	    cp /app/setup-cbpolicyd.sh $ZIMBRA_ENVIRONMENT_PATH/app/
+        cp /app/zcs-export.sh $ZIMBRA_ENVIRONMENT_PATH/app/
+        cp /app/zcs-import.sh $ZIMBRA_ENVIRONMENT_PATH/app/
+
+        echo "Setting customized permissions"
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/queue-control.sh
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/queue-mon.sh
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/certbot-zimbra.sh
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/certbot-zimbra-deploy.sh
 	    chmod 750 $ZIMBRA_ENVIRONMENT_PATH/app/setup-cbpolicyd.sh
+        chmod 750 $ZIMBRA_ENVIRONMENT_PATH/app/zcs-export.sh
+        chmod 750 $ZIMBRA_ENVIRONMENT_PATH/app/zcs-import.sh
 
         echo "Installing crontab"
         #echo "*/1 * * * * /root/queue-control.sh" >> /etc/crontab
