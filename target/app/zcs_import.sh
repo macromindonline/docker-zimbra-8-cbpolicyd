@@ -13,6 +13,8 @@ else
         echo "You need to set the domain to export."
         exit
     else
+
+        zmprov cd ${DOMAIN} zimbraPrefTimeZoneId America/Sao_Paulo zimbraPublicServiceProtocol https zimbraVirtualHostname webmail.${DOMAIN}
         
         NFS="/mg/mx"
 
