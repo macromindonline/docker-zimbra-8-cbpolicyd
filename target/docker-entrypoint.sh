@@ -61,7 +61,6 @@ function setup_environment
         cp /app/queue-control.sh $ZIMBRA_ENVIRONMENT_PATH/root/
         cp /app/queue-mon.sh $ZIMBRA_ENVIRONMENT_PATH/root/
         cp /app/certbot-zimbra.sh $ZIMBRA_ENVIRONMENT_PATH/root/
-        cp /app/certbot-zimbra-deploy.sh $ZIMBRA_ENVIRONMENT_PATH/root/
         cp /app/zextras_suite-latest.tgz $ZIMBRA_ENVIRONMENT_PATH/root/
 	    cp /app/setup-cbpolicyd.sh $ZIMBRA_ENVIRONMENT_PATH/app/
         cp /app/zcs-export.sh $ZIMBRA_ENVIRONMENT_PATH/app/
@@ -71,7 +70,6 @@ function setup_environment
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/queue-control.sh
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/queue-mon.sh
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/certbot-zimbra.sh
-        chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/certbot-zimbra-deploy.sh
 	    chmod 750 $ZIMBRA_ENVIRONMENT_PATH/app/setup-cbpolicyd.sh
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/app/zcs-export.sh
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/app/zcs-import.sh
