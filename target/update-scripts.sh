@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ZIMBRA_ENVIRONMENT_PATH="/data"
+ZIMBRA_ENVIRONMENT_PATH="../data"
 
 echo "Copying customized scripts"
 mkdir -p $ZIMBRA_ENVIRONMENT_PATH/opt/zimbra/scripts
