@@ -61,23 +61,29 @@ function setup_environment
         cp /app/queue-control.sh $ZIMBRA_ENVIRONMENT_PATH/root/
         cp /app/queue-mon.sh $ZIMBRA_ENVIRONMENT_PATH/root/
         cp /app/certbot-zimbra.sh $ZIMBRA_ENVIRONMENT_PATH/root/
-        cp /app/zextras_suite-latest.tgz $ZIMBRA_ENVIRONMENT_PATH/root/
+        cp /app/zcs-export.sh $ZIMBRA_ENVIRONMENT_PATH/root/
+        cp /app/zcs-import.sh $ZIMBRA_ENVIRONMENT_PATH/root/
+        cp /app/enable-antispam.sh $ZIMBRA_ENVIRONMENT_PATH/root/
+        cp /app/change-date-pop.sh $ZIMBRA_ENVIRONMENT_PATH/root/
+        cp /app/queue-delete.pl $ZIMBRA_ENVIRONMENT_PATH/root/
 	    cp /app/setup-cbpolicyd.sh $ZIMBRA_ENVIRONMENT_PATH/app/
-        cp /app/zcs-export.sh $ZIMBRA_ENVIRONMENT_PATH/app/
-        cp /app/zcs-import.sh $ZIMBRA_ENVIRONMENT_PATH/app/
 
         echo "Setting customized permissions"
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/queue-control.sh
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/queue-mon.sh
         chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/certbot-zimbra.sh
+        chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/zcs-export.sh
+        chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/zcs-import.sh
+        chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/enable-antispam.sh
+        chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/change-date-pop.sh
+        chmod 750 $ZIMBRA_ENVIRONMENT_PATH/root/queue-delete.pl
 	    chmod 750 $ZIMBRA_ENVIRONMENT_PATH/app/setup-cbpolicyd.sh
-        chmod 750 $ZIMBRA_ENVIRONMENT_PATH/app/zcs-export.sh
-        chmod 750 $ZIMBRA_ENVIRONMENT_PATH/app/zcs-import.sh
 
         echo "Installing crontab"
         #echo "*/1 * * * * /root/queue-control.sh" >> /etc/crontab
         #echo "*/2 * * * * /root/queue-mon.sh" >> /etc/crontab
         #echo "0 0 * * * /root/queue-mon.sh clean" >> /etc/crontab
+        #echo "0 0 * * * /root/enable-antispam.sh" >> /etc/crontab
         #echo "0 0 * * SAT sudo -u zimbra for i in `/opt/zimbra/bin/zmprov -l gaa`; do zmmailbox -z -A -m $i emptyDumpster; done" >> /etc/crontab
 
         prepare_chroot
