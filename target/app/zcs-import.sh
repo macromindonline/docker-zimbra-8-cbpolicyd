@@ -7,7 +7,7 @@ then
 else
     echo "Ok, running as zimbra..."
     DOMAIN="$1"
-    
+
     if [[ -z "${DOMAIN}" ]]
     then
         echo "You need to set the domain to export."
@@ -15,7 +15,7 @@ else
     else
 
         zmprov cd ${DOMAIN} zimbraPrefTimeZoneId America/Sao_Paulo zimbraPublicServiceProtocol https zimbraVirtualHostname webmail.${DOMAIN}
-        
+
         NFS="/mg/mx"
 
         echo
@@ -24,10 +24,12 @@ else
         for ACCOUNT_FILE in `ls ${NFS}/${DOMAIN}`
         do
             ACCOUNT_NAME=`echo ${ACCOUNT_FILE%.*}`
-            echo "Opening and importing ${ACCOUNT_FILE} to ${ACCOUNT_NAME}"
+            echo "Creating account ${ACCOUNT_NAME}"
+            zmprov ca ${ACCOUNT_NAME} ChangeMe@123
+            echo "Opening ${ACCOUNT_FILE} and importing to ${ACCOUNT_NAME}"
             TGZ="${NFS}/${DOMAIN}/${ACCOUNT_FILE}"
             zmmailbox -z -m ${ACCOUNT_NAME} postRestURL "//?fmt=tgz&resolve=skip" ${TGZ}
             echo "Done..."
-        done      
+        done
     fi
 fi
