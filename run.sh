@@ -26,7 +26,7 @@ docker run -it \
     -p $IPV4:5223:5223 \
     -p $IPV4:7071:7071 \
     --volume $PWD/data:/data \
-    --volume /mg/mx:/mg/mx \
+    --volume /mg/mx:/data/mg/mx \
     --cap-add NET_ADMIN \
     --cap-add SYS_ADMIN \
     --cap-add SYS_PTRACE \
