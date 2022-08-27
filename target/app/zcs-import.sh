@@ -26,6 +26,14 @@ else
             ACCOUNT_NAME=`echo ${ACCOUNT_FILE%.*}`
             echo "Creating account ${ACCOUNT_NAME}"
             zmprov ca ${ACCOUNT_NAME} ChangeMe@123
+            echo "Configuring Pop3 download date to ${ACCOUNT_NAME}"
+            zmprov ma ${ACCOUNT_NAME} zimbraPrefPop3DownloadSince $(date "+%Y%m%d%H%M%S"Z)
+            echo "${ACCOUNT_NAME} => DisableWarnings"
+            zmmailbox -z -m ${ACCOUNT_NAME} addFilterRule "DisableWarnings" active any address "from" all contains "MAILER-DAEMON" discard
+            echo "${ACCOUNT_NAME} => AntispamTitle"
+            zmmailbox -z -m ${ACCOUNT_NAME} addFilterRule "AntispamTitle" active any header "subject" contains "SPAM" fileinto "Junk"
+            echo "${ACCOUNT_NAME} => AntispamUnsubscribe"
+            zmmailbox -z -m ${ACCOUNT_NAME} addFilterRule "AntispamUnsubscribe" active any header "List-Unsubscribe" exists fileinto "Junk"
             echo "Opening ${ACCOUNT_FILE} and importing to ${ACCOUNT_NAME}"
             TGZ="${NFS}/${DOMAIN}/${ACCOUNT_FILE}"
             zmmailbox -z -m ${ACCOUNT_NAME} postRestURL "//?fmt=tgz&resolve=skip" ${TGZ}
